@@ -225,6 +225,21 @@ open class LightboxController: UIViewController {
     }, completion: nil)
   }
 
+  // MARK: - Partial update
+  
+  open func updatePageImage(page: Int, image: LightboxImage) {
+    guard page >= 0 && page < numberOfPages else {
+      return
+    }
+    let pageView = pageViews[page]
+    initialImages[page] = image
+    pageView.update(with: image)
+    
+    footerView.updateText(pageView.image.text)
+    
+    pageView.configureLayout()
+  }
+    
   // MARK: - Configuration
 
   func configurePages(_ images: [LightboxImage]) {
