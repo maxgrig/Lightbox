@@ -39,7 +39,7 @@ public class LightboxConfig {
   /// Number of images to preload.
   ///
   /// 0 - Preload all images (default).
-  public static var preload = 0
+  public static var preload = 1
 
   public struct PageIndicator {
     public static var enabled = true
@@ -74,7 +74,7 @@ public class LightboxConfig {
   }
 
   public struct DeleteButton {
-    public static var enabled = false
+    public static var enabled = true
     public static var size: CGSize?
     public static var text = NSLocalizedString("Delete", comment: "")
     public static var image: UIImage?
@@ -97,7 +97,7 @@ public class LightboxConfig {
     public static var ellipsisColor = UIColor(hex: "899AB9")
 
     public static var textAttributes: [NSAttributedString.Key: Any] = [
-      .font: UIFont.systemFont(ofSize: 12),
+      .font: UIFont.systemFont(ofSize: 14),
       .foregroundColor: UIColor(hex: "DBDBDB")
     ]
   }
