@@ -1,20 +1,21 @@
 import UIKit
 
-public protocol LightboxControllerPageDelegate: class {
+@objc public protocol LightboxControllerPageDelegate: class {
 
   func lightboxController(_ controller: LightboxController, didMoveToPage page: Int)
 }
 
-public protocol LightboxControllerDismissalDelegate: class {
+@objc public protocol LightboxControllerDismissalDelegate: class {
 
   func lightboxControllerWillDismiss(_ controller: LightboxController)
 }
 
-public protocol LightboxControllerTouchDelegate: class {
+@objc public protocol LightboxControllerTouchDelegate: class {
 
   func lightboxController(_ controller: LightboxController, didTouch image: LightboxImage, at index: Int)
 }
 
+@objc(LightboxController)
 open class LightboxController: UIViewController {
 
   // MARK: - Internal views
@@ -53,21 +54,21 @@ open class LightboxController: UIViewController {
 
   // MARK: - Public views
 
-  open fileprivate(set) lazy var headerView: HeaderView = { [unowned self] in
+  @objc open fileprivate(set) lazy var headerView: HeaderView = { [unowned self] in
     let view = HeaderView()
     view.delegate = self
 
     return view
   }()
 
-  open fileprivate(set) lazy var footerView: FooterView = { [unowned self] in
+  @objc open fileprivate(set) lazy var footerView: FooterView = { [unowned self] in
     let view = FooterView()
     view.delegate = self
 
     return view
   }()
 
-  open fileprivate(set) lazy var overlayView: UIView = { [unowned self] in
+  @objc open fileprivate(set) lazy var overlayView: UIView = { [unowned self] in
     let view = UIView(frame: CGRect.zero)
     let gradient = CAGradientLayer()
     let colors = [UIColor(hex: "090909").withAlphaComponent(0), UIColor(hex: "040404")]
@@ -80,7 +81,7 @@ open class LightboxController: UIViewController {
 
   // MARK: - Properties
 
-  open fileprivate(set) var currentPage = 0 {
+  @objc open fileprivate(set) var currentPage = 0 {
     didSet {
       currentPage = min(numberOfPages - 1, max(0, currentPage))
       footerView.updatePage(currentPage + 1, numberOfPages)
@@ -102,11 +103,11 @@ open class LightboxController: UIViewController {
     }
   }
 
-  open var numberOfPages: Int {
+  @objc open var numberOfPages: Int {
     return pageViews.count
   }
 
-  open var dynamicBackground: Bool = false {
+  @objc open var dynamicBackground: Bool = false {
     didSet {
       if dynamicBackground == true {
         effectView.frame = view.frame
@@ -120,13 +121,13 @@ open class LightboxController: UIViewController {
     }
   }
 
-  open var spacing: CGFloat = 20 {
+  @objc open var spacing: CGFloat = 20 {
     didSet {
       configureLayout(view.bounds.size)
     }
   }
 
-  open var images: [LightboxImage] {
+  @objc open var images: [LightboxImage] {
     get {
       return pageViews.map { $0.image }
     }
@@ -136,11 +137,11 @@ open class LightboxController: UIViewController {
     }
   }
 
-  open weak var pageDelegate: LightboxControllerPageDelegate?
-  open weak var dismissalDelegate: LightboxControllerDismissalDelegate?
-  open weak var imageTouchDelegate: LightboxControllerTouchDelegate?
-  open internal(set) var presented = false
-  open fileprivate(set) var seen = false
+  @objc open weak var pageDelegate: LightboxControllerPageDelegate?
+  @objc open weak var dismissalDelegate: LightboxControllerDismissalDelegate?
+  @objc open weak var imageTouchDelegate: LightboxControllerTouchDelegate?
+  @objc open internal(set) var presented = false
+  @objc open fileprivate(set) var seen = false
 
   lazy var transitionManager: LightboxTransition = LightboxTransition()
   var pageViews = [PageView]()
@@ -151,7 +152,7 @@ open class LightboxController: UIViewController {
 
   // MARK: - Initializers
 
-  public init(images: [LightboxImage] = [], startIndex index: Int = 0) {
+  @objc public init(images: [LightboxImage] = [], startIndex index: Int = 0) {
     self.initialImages = images
     self.initialPage = index
     super.init(nibName: nil, bundle: nil)
@@ -278,7 +279,7 @@ open class LightboxController: UIViewController {
 
   // MARK: - Pagination
 
-  open func goTo(_ page: Int, animated: Bool = true) {
+  @objc open func goTo(_ page: Int, animated: Bool = true) {
     guard page >= 0 && page < numberOfPages else {
       return
     }
@@ -293,11 +294,11 @@ open class LightboxController: UIViewController {
     scrollView.setContentOffset(offset, animated: shouldAnimated)
   }
 
-  open func next(_ animated: Bool = true) {
+  @objc open func next(_ animated: Bool = true) {
     goTo(currentPage + 1, animated: animated)
   }
 
-  open func previous(_ animated: Bool = true) {
+  @objc open func previous(_ animated: Bool = true) {
     goTo(currentPage - 1, animated: animated)
   }
 
@@ -309,7 +310,7 @@ open class LightboxController: UIViewController {
 
   // MARK: - Layout
 
-  open func configureLayout(_ size: CGSize) {
+  @objc open func configureLayout(_ size: CGSize) {
     scrollView.frame.size = size
     scrollView.contentSize = CGSize(
       width: size.width * CGFloat(numberOfPages) + spacing * CGFloat(numberOfPages - 1),

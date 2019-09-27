@@ -5,6 +5,7 @@ public protocol FooterViewDelegate: class {
   func footerView(_ footerView: FooterView, didExpand expanded: Bool)
 }
 
+@objc(FooterView)
 open class FooterView: UIView {
 
   open fileprivate(set) lazy var infoLabel: InfoLabel = { [unowned self] in

@@ -5,6 +5,7 @@ protocol HeaderViewDelegate: class {
   func headerView(_ headerView: HeaderView, didPressCloseButton closeButton: UIButton)
 }
 
+@objc(HeaderView)
 open class HeaderView: UIView {
   open fileprivate(set) lazy var closeButton: UIButton = { [unowned self] in
     let title = NSAttributedString(

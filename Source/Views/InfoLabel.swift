@@ -5,6 +5,7 @@ public protocol InfoLabelDelegate: class {
   func infoLabel(_ infoLabel: InfoLabel, didExpand expanded: Bool)
 }
 
+@objc(InfoLabel)
 open class InfoLabel: UILabel {
 
   lazy var tapGestureRecognizer: UITapGestureRecognizer = { [unowned self] in
