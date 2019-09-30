@@ -35,6 +35,8 @@ class PageView: UIScrollView {
 
   lazy var loadingIndicator: UIView = LightboxConfig.makeLoadingIndicator()
 
+  var initialContentFrame = CGRect.zero
+  
   var image: LightboxImage
   var contentFrame = CGRect.zero
   weak var pageViewDelegate: PageViewDelegate?
@@ -207,9 +209,11 @@ class PageView: UIScrollView {
 extension PageView: LayoutConfigurable {
 
   @objc func configureLayout() {
-    contentFrame = frame
-    contentSize = frame.size
-    imageView.frame = frame
+    if initialContentFrame.isEmpty { initialContentFrame = frame }
+    
+    contentFrame = initialContentFrame
+    contentSize = initialContentFrame.size
+    imageView.frame = initialContentFrame
     zoomScale = minimumZoomScale
 
     configureImageView()

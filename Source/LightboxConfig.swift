@@ -74,7 +74,7 @@ public class LightboxConfig {
   }
 
   public struct DeleteButton {
-    public static var enabled = true
+    public static var enabled = false
     public static var size: CGSize?
     public static var text = NSLocalizedString("Delete", comment: "")
     public static var image: UIImage?
@@ -104,6 +104,6 @@ public class LightboxConfig {
 
   public struct Zoom {
     public static var minimumScale: CGFloat = 1.0
-    public static var maximumScale: CGFloat = 3.0
+    public static var maximumScale: CGFloat = 4.0
   }
 }

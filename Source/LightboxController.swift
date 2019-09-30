@@ -228,7 +228,7 @@ open class LightboxController: UIViewController {
 
   // MARK: - Partial update
   
-  open func updatePageImage(page: Int, image: LightboxImage) {
+  @objc open func updatePageImage(_ page: Int, image: LightboxImage) {
     guard page >= 0 && page < numberOfPages else {
       return
     }
