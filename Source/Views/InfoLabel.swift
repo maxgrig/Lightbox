@@ -146,7 +146,7 @@ open class InfoLabel: UILabel {
 
 extension InfoLabel: LayoutConfigurable {
 
-  @objc public func configureLayout() {
+  @objc public func configureLayout(fullRelayout: Bool = false) {
     shortText = truncatedText
     expanded ? expand() : collapse()
   }

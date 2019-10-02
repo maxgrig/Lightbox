@@ -208,7 +208,8 @@ class PageView: UIScrollView {
 
 extension PageView: LayoutConfigurable {
 
-  @objc func configureLayout() {
+  @objc func configureLayout(fullRelayout: Bool = false) {
+    if fullRelayout { initialContentFrame = CGRect.zero }
     if initialContentFrame.isEmpty { initialContentFrame = frame }
     
     contentFrame = initialContentFrame

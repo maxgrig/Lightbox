@@ -213,9 +213,16 @@ open class LightboxController: UIViewController {
   }
 
   open override var prefersStatusBarHidden: Bool {
-    return LightboxConfig.hideStatusBar
+    switch UIApplication.shared.statusBarOrientation {
+    case .landscapeLeft, .landscapeRight: return true
+    default: return LightboxConfig.hideStatusBar
+    }
   }
-
+  
+  open override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   // MARK: - Rotation
 
   override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -321,13 +328,13 @@ open class LightboxController: UIViewController {
       var frame = scrollView.bounds
       frame.origin.x = (frame.width + spacing) * CGFloat(index)
       pageView.frame = frame
-      pageView.configureLayout()
+      pageView.configureLayout(fullRelayout: true)
       if index != numberOfPages - 1 {
         pageView.frame.size.width += spacing
       }
     }
 
-    [headerView, footerView].forEach { ($0 as AnyObject).configureLayout() }
+    [headerView, footerView].forEach { ($0 as AnyObject).configureLayout(fullRelayout: false) }
 
     overlayView.frame = scrollView.frame
     overlayView.resizeGradientLayer()

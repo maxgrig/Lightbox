@@ -92,7 +92,7 @@ open class HeaderView: UIView {
 
 extension HeaderView: LayoutConfigurable {
 
-  @objc public func configureLayout() {
+  @objc public func configureLayout(fullRelayout: Bool = false) {
     let topPadding: CGFloat
 
     if #available(iOS 11, *) {

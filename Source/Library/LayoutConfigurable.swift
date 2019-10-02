@@ -1,4 +1,4 @@
 protocol LayoutConfigurable: class {
 
-  func configureLayout()
+  func configureLayout(fullRelayout: Bool)
 }
