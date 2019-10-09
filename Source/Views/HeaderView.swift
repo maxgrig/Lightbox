@@ -7,7 +7,7 @@ protocol HeaderViewDelegate: class {
 
 @objc(HeaderView)
 open class HeaderView: UIView {
-  open fileprivate(set) lazy var closeButton: UIButton = { [unowned self] in
+  @objc open fileprivate(set) lazy var closeButton: UIButton = { [unowned self] in
     let title = NSAttributedString(
       string: LightboxConfig.CloseButton.text,
       attributes: LightboxConfig.CloseButton.textAttributes)
@@ -34,7 +34,7 @@ open class HeaderView: UIView {
     return button
   }()
 
-  open fileprivate(set) lazy var deleteButton: UIButton = { [unowned self] in
+  @objc open fileprivate(set) lazy var deleteButton: UIButton = { [unowned self] in
     let title = NSAttributedString(
       string: LightboxConfig.DeleteButton.text,
       attributes: LightboxConfig.DeleteButton.textAttributes)
