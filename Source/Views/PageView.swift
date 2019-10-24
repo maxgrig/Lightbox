@@ -132,7 +132,7 @@ class PageView: UIScrollView {
     let height = contentFrame.size.height / newZoomScale
     let x = pointInView.x - (width / 2.0)
     let y = pointInView.y - (height / 2.0)
-
+    
     let rectToZoomTo = CGRect(x: x, y: y, width: width, height: height)
 
     zoom(to: rectToZoomTo, animated: true)
@@ -212,11 +212,12 @@ extension PageView: LayoutConfigurable {
     if fullRelayout { initialContentFrame = CGRect.zero }
     if initialContentFrame.isEmpty { initialContentFrame = frame }
     
+    zoomScale = minimumZoomScale
+    
     contentFrame = initialContentFrame
     contentSize = initialContentFrame.size
     imageView.frame = initialContentFrame
-    zoomScale = minimumZoomScale
-
+    
     configureImageView()
   }
 }
